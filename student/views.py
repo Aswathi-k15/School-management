@@ -4,9 +4,10 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
-from school.student.models import Student, StudentEditSerializer
-from .serializers import StudentRegistrationSerializer, StudentLoginSerializer
+from rest_framework_simplejwt.tokens import RefreshToken  
+from django.contrib.auth.hashers import check_password
+from school.student.models import *
+from .serializers import *
 
 class StudentRegistrationView(APIView):
     def post(self, request):
@@ -16,14 +17,6 @@ class StudentRegistrationView(APIView):
             return Response({"message": "Registration successful."}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from django.contrib.auth.hashers import check_password
-from .models import Student
-from .serializers import StudentLoginSerializer
 
 class StudentLoginView(APIView):
     def post(self, request):
@@ -63,13 +56,6 @@ class StudentEditView(APIView):
             return Response({"message": "Details updated successfully.", "data": serializer.data}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
-
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import Student
-from .serializers import StudentDetailSerializer
 
 class StudentListView(APIView):
 permission_classes = [IsAuthenticated] # type: ignore
