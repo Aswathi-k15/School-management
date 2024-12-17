@@ -22,7 +22,7 @@ class OfficeStaffProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OfficeStaffProfile
-        fields = ['id', 'user', 'phone_number', 'address', 'date_joined']
+        fields = '_all_'
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
@@ -48,7 +48,7 @@ class LibrarianProfileSerializer(serializers.ModelSerializer):
 class StudentDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['student_id', 'name', 'age', 'phone_number', 'class_name', 'address']
+        fields = '_all_'
 
 
 class LibraryHistorySerializer(serializers.ModelSerializer):
