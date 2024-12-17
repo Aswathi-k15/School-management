@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
 
 class OfficeStaffProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='office_staff_profile')
+    username=models.CharField(max_length=100) 
     phone_number = models.CharField(max_length=15)
     password = models.CharField(max_length=8)  # Added password field
 
@@ -24,6 +25,7 @@ class OfficeStaffProfile(models.Model):
 class LibrarianProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='librarian_profile')
     phone_number = models.CharField(max_length=15)
+    username=models.CharField(max_length=100)
     password = models.CharField(max_length=8)  # Added password field
     library_assigned = models.CharField(max_length=100)
     date_joined = models.DateField(auto_now_add=True)
