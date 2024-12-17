@@ -1,9 +1,8 @@
 from django.db import models
-
-from school import student
 from school.student.models import Student
+from django.contrib.auth.models import User
+from school.library.models import LibraryHistory
 
-# Create your models here.
 
 class FeesHistory(models.Model):
     student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -15,9 +14,6 @@ class FeesHistory(models.Model):
     def _str_(self):
         return f"{self.student.name} - {self.fee_type}"
     
-from django.db import models
-from django.contrib.auth.models import User
-from .models import LibraryHistory
 
 class Review(models.Model):
     library_record = models.ForeignKey(LibraryHistory, on_delete=models.CASCADE, related_name='reviews')
