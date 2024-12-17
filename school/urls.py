@@ -22,6 +22,6 @@ urlpatterns = [
     path('', include('admin.urls')),  # Includes accounts app URLs
     path('students/', include('student.urls')),  # Includes students app URLs
     path('library/', include('library.urls')),    # Includes library app URLs
-    path('officeStaff/', include('officeStaff.urls')),          # Includes fees app URLs
+    path('officeStaff/', include('officeStaff.urls')),          
     # Add more app includes as needed
 ]
