@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, OfficeStaffProfile, LibrarianProfile
+from .models import CustomUser, OfficeStaffProfile, LibrarianProfile, Student, LibraryHistory, FeesHistory
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -45,27 +45,16 @@ class LibrarianProfileSerializer(serializers.ModelSerializer):
         return librarian
     
 
-from rest_framework import serializers
-from .models import Student
-
 class StudentDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ['student_id', 'name', 'age', 'phone_number', 'class_name', 'address']
 
 
-# serializers.py
-from rest_framework import serializers
-from .models import LibraryHistory
-
 class LibraryHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = LibraryHistory
         fields = '_all_'
-
-
-from rest_framework import serializers
-from .models import FeesHistory
 
 class FeesHistorySerializer(serializers.ModelSerializer):
     class Meta:
