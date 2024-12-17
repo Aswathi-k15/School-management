@@ -18,6 +18,12 @@ class StudentRegistrationSerializer(serializers.ModelSerializer):
         validated_data.pop('confirm_password')  # Remove confirm_password
         return Student.objects.create(**validated_data)
 
+class StudentEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ['age', 'phone_number', 'class_name', 'address']
+
+
 
 class StudentLoginSerializer(serializers.Serializer):
     name = serializers.CharField()
