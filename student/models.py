@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.hashers import make_password
 
 from school.student import serializers
@@ -23,10 +20,3 @@ class Student(models.Model):
     def _str_(self):
         return self.name
     
-
-
-class StudentEditSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Student
-        fields = ['age', 'phone_number', 'class_name', 'address']
-
