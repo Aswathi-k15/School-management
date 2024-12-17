@@ -1,7 +1,7 @@
 # serializers.py
 from rest_framework import serializers
 from .models import LibraryHistory
-from student.models import *
+from Student.models import *
 
 class LibraryHistorySerializer(serializers.ModelSerializer):
     class Meta:
