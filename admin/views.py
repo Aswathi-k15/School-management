@@ -1,17 +1,17 @@
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
-from .models import OfficeStaffProfile, LibrarianProfile, Student
-from .serializers import (
-    OfficeStaffProfileSerializer,
-    LibrarianProfileSerializer,
-    StudentDetailSerializer,
-)
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from school.library.models import LibraryHistory
+from .models import *
+from .serializers import *
+from school.officestaff.models import FeesHistory
+from django.contrib.auth import logout
 
 
 # ViewSet for OfficeStaffProfile
@@ -35,11 +35,6 @@ class StudentListView(APIView):
         serializer = StudentDetailSerializer(students, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-
-from rest_framework.viewsets import ReadOnlyModelViewSet
-from .models import LibraryHistory
-from .serializers import LibraryHistorySerializer
-
 class LibraryHistoryViewSet(ReadOnlyModelViewSet):
     """
     ViewSet for read-only access to LibraryHistory records.
@@ -47,25 +42,12 @@ class LibraryHistoryViewSet(ReadOnlyModelViewSet):
     queryset = LibraryHistory.objects.all()
     serializer_class = LibraryHistorySerializer
 
-
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework import status
-from .models import FeesHistory
-from .serializers import FeesHistorySerializer
-
 class FeesHistoryViewSet(viewsets.ViewSet):
     def list(self, request):
         fees_history = FeesHistory.objects.all()
         serializer = FeesHistorySerializer(fees_history, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import CustomUser
 
 def user_login(request):
     if request.method == 'POST':
@@ -93,8 +75,7 @@ def user_login(request):
     
     return render(request, 'accounts/login.html')
 
-from django.contrib.auth import logout
-from django.shortcuts import redirect
+
 
 def user_logout(request):
     logout(request)
