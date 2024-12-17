@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from fastapi import Response
 from streamlit import status
-
-from school.officeStaff.serializers import StudentDetailSerializer
+from rest_framework.viewsets import ModelViewSet
+from .models import Review
+from rest_framework.permissions import IsAuthenticated
+from school.officeStaff.serializers import *
 from school.student.models import Student
 
 # Create your views here.
@@ -13,12 +15,6 @@ def get(self, request):
         serializer = StudentDetailSerializer(students, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-
-from rest_framework.viewsets import ModelViewSet
-from .models import Review
-from .serializers import ReviewSerializer
-from rest_framework.permissions import IsAuthenticated
 
 class ReviewViewSet(ModelViewSet):
     """
