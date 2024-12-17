@@ -1,6 +1,7 @@
 from school.officeStaff.models import FeesHistory
 from school.student import serializers
 from school.student.models import Student
+from .models import Review
 
 
 class FeesHistorySerializer(serializers.ModelSerializer):
@@ -13,9 +14,7 @@ class StudentDetailSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['student_id', 'name', 'age', 'phone_number', 'class_name', 'address']
 
-# serializers.py
-from rest_framework import serializers
-from .models import Review
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
